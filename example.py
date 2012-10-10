@@ -34,6 +34,30 @@ def get_settings(argv):
 
   return file_xml
   
+
+# use finditer_all becauce finditer is no-overlapping
+# example
+# sequence = "BABBEBIB"
+# reg = "B.B"
+# no-overlapping => ['BAB', 'BEB'] 
+# with overlapping => ['BAB', 'BEB', 'BIB']
+def finditer_all(regex, seq):
+  resultlist = []
+  pos = 0
+
+  pattern = re.compile(regex.decode(DEFAULT_ENCODING))
+  while True:
+    try:
+      result = pattern.search(seq, pos)
+    except:
+      pass
+    if result is None:
+      break
+    resultlist.append(seq[result.start():result.end()])
+    pos = result.start() + 1
+
+  return resultlist
+
 if __name__ == '__main__':
   file_xml = get_settings(sys.argv)
   print file_xml
