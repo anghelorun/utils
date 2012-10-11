@@ -47,10 +47,7 @@ def finditer_all(regex, seq):
 
   pattern = re.compile(regex.decode(DEFAULT_ENCODING))
   while True:
-    try:
-      result = pattern.search(seq, pos)
-    except:
-      pass
+    result = pattern.search(seq, pos)
     if result is None:
       break
     resultlist.append(seq[result.start():result.end()])
